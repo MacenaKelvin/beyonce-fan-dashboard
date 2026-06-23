@@ -1,0 +1,16 @@
+.app-shell {
+  min-height: 100vh;
+  background: #09090b;
+  color: #fafafa;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  padding-bottom: 96px;
+}
+
+.main-content {
+  min-width: 0;
+}
+
+.page-content {
+  padding: 24px;
+}

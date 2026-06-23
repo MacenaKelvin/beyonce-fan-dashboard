@@ -1,0 +1,32 @@
+.dashboard{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 420px;
+
+    gap:24px;
+
+}
+
+.placeholder-card{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:24px;
+
+    min-height:420px;
+
+}

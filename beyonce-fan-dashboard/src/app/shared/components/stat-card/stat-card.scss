@@ -1,0 +1,49 @@
+.card{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:24px;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    background:var(--surface-light);
+
+}
+
+span{
+
+    color:var(--muted);
+
+    font-size:.85rem;
+
+}
+
+h2{
+
+    margin-top:14px;
+
+    margin-bottom:12px;
+
+    font-size:2rem;
+
+    color:var(--platinum);
+
+}
+
+small{
+
+    color:var(--silver);
+
+}
