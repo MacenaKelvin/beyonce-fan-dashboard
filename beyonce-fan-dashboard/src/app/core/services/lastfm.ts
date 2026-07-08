@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { forkJoin, map, of, switchMap, catchError } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import {
@@ -8,12 +8,14 @@ import {
   LastfmTrack,
 } from '../../shared/models/lastfm-response';
 import { Track } from '../../shared/models/track';
+import { Itunes } from './itunes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Lastfm {
   private readonly http = inject(HttpClient);
+  private readonly itunes = inject(Itunes);
 
   getTopTracks(artist = 'Beyoncé', limit = 5) {
     return this.http
@@ -29,7 +31,28 @@ export class Lastfm {
       .pipe(
         map((response) =>
           response.toptracks.track.map((track) => this.mapTrack(track))
-        )
+        ),
+        switchMap((tracks) => {
+          const enrichedTracks = tracks.map((track) =>
+            this.itunes.searchTrack(track.name, track.artist).pipe(
+              map((result: any) => {
+                const item = result.results?.[0];
+
+                return {
+                  ...track,
+                  album: item?.collectionName ?? track.album,
+                  image:
+                    item?.artworkUrl100?.replace('100x100', '300x300') ??
+                    track.image,
+                  previewUrl: item?.previewUrl,
+                };
+              }),
+              catchError(() => of(track))
+            )
+          );
+
+          return forkJoin(enrichedTracks);
+        })
       );
   }
 

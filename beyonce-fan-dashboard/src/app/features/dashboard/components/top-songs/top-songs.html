@@ -8,45 +8,31 @@
     <button>View all</button>
   </div>
 
-  <div class="song-list">
-    <article class="song-item">
-      <span class="rank">01</span>
-      <div class="cover">R</div>
-      <div class="song-info">
-        <strong>CUFF IT</strong>
-        <small>Renaissance</small>
-      </div>
-      <span class="plays">68.4M</span>
-    </article>
+  @if (loading()) {
+    <p class="state">Loading songs...</p>
+  } @else {
+    <div class="song-list">
+      @for (song of tracks(); track song.name; let index = $index) {
+        <article class="song-item">
+          <span class="rank">
+  {{ (index + 1).toString().padStart(2, '0') }}
+</span>
+          <div class="cover">
+            @if (song.image) {
+              <img [src]="song.image" [alt]="song.name" />
+            } @else {
+              {{ song.name.charAt(0) }}
+            }
+          </div>
 
-    <article class="song-item">
-      <span class="rank">02</span>
-      <div class="cover">L</div>
-      <div class="song-info">
-        <strong>Formation</strong>
-        <small>Lemonade</small>
-      </div>
-      <span class="plays">54.2M</span>
-    </article>
+          <div class="song-info">
+            <strong>{{ song.name }}</strong>
+            <small>{{ song.album || song.artist }}</small>
+          </div>
 
-    <article class="song-item">
-      <span class="rank">03</span>
-      <div class="cover">B</div>
-      <div class="song-info">
-        <strong>ALIEN SUPERSTAR</strong>
-        <small>Renaissance</small>
-      </div>
-      <span class="plays">47.8M</span>
-    </article>
-
-    <article class="song-item">
-      <span class="rank">04</span>
-      <div class="cover">S</div>
-      <div class="song-info">
-        <strong>Crazy In Love</strong>
-        <small>Dangerously in Love</small>
-      </div>
-      <span class="plays">41.9M</span>
-    </article>
-  </div>
+          <span class="plays">{{ song.playcount | compactNumber }} plays</span>
+        </article>
+      }
+    </div>
+  }
 </section>

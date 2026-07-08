@@ -5,10 +5,10 @@ import { Track } from '../../shared/models/track';
 
 import { StatsGrid } from './components/stats-grid/stats-grid';
 import { TopSongs } from './components/top-songs/top-songs';
-
+import { Hero } from './components/hero/hero';
 @Component({
   selector: 'app-dashboard',
-  imports: [StatsGrid, TopSongs],
+  imports: [StatsGrid, TopSongs, Hero,],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

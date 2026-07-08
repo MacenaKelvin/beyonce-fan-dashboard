@@ -6,4 +6,5 @@ export interface Track {
   playcount: string;
   url: string;
   image: string;
+  previewUrl?: string;
 }
