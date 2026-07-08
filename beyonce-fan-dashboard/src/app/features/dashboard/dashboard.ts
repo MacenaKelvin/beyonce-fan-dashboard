@@ -6,9 +6,11 @@ import { Track } from '../../shared/models/track';
 import { StatsGrid } from './components/stats-grid/stats-grid';
 import { TopSongs } from './components/top-songs/top-songs';
 import { Hero } from './components/hero/hero';
+import { EraChart } from './components/era-chart/era-chart';
+import { AlbumTimeline } from './components/album-timeline/album-timeline';
 @Component({
   selector: 'app-dashboard',
-  imports: [StatsGrid, TopSongs, Hero,],
+  imports: [StatsGrid, TopSongs, Hero, EraChart, AlbumTimeline],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

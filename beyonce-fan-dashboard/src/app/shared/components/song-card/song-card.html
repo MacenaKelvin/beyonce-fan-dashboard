@@ -1,0 +1,22 @@
+<article class="song-item">
+  <span class="rank">
+    {{ (index() + 1).toString().padStart(2, '0') }}
+  </span>
+
+  <div class="cover">
+    @if (track().image) {
+      <img [src]="track().image" [alt]="track().name" />
+    } @else {
+      {{ track().name.charAt(0) }}
+    }
+  </div>
+
+  <div class="song-info">
+    <strong>{{ track().name }}</strong>
+    <small>{{ track().album || track().artist }}</small>
+  </div>
+
+  <span class="plays">
+    {{ track().playcount | compactNumber }} plays
+  </span>
+</article>

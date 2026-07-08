@@ -1,14 +1,26 @@
 <div class="dashboard">
-<app-hero></app-hero>
 
-<app-stats-grid></app-stats-grid>
+  <!-- Hero -->
+  <app-hero></app-hero>
 
+  <!-- Cards de estatísticas -->
+  <app-stats-grid></app-stats-grid>
+
+  <!-- Grid principal -->
   <div class="dashboard-grid">
-    <app-top-songs [tracks]="tracks()" [loading]="loading()"></app-top-songs>
 
-    <div class="placeholder-card">
-      <h3>Era Distribution</h3>
-      <p>Chart.js coming soon...</p>
-    </div>
+    <!-- Top Songs -->
+    <app-top-songs
+      [tracks]="tracks()"
+      [loading]="loading()">
+    </app-top-songs>
+
+    <!-- Era Distribution -->
+    <app-era-chart></app-era-chart>
+
   </div>
+
+  <!-- Timeline -->
+  <app-album-timeline></app-album-timeline>
+
 </div>

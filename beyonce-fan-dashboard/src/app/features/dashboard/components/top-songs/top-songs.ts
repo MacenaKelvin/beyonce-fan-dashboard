@@ -1,10 +1,10 @@
 import { Component, input } from '@angular/core';
 import { Track } from '../../../../shared/models/track';
-import { CompactNumberPipe } from '../../../../shared/pipes/compact-number-pipe';
+import { SongCard } from '../../../../shared/components/song-card/song-card';
 
 @Component({
   selector: 'app-top-songs',
-  imports: [CompactNumberPipe],
+  imports: [SongCard],
   templateUrl: './top-songs.html',
   styleUrl: './top-songs.scss',
 })

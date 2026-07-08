@@ -9,30 +9,24 @@
   </div>
 
   @if (loading()) {
+
     <p class="state">Loading songs...</p>
+
   } @else {
+
     <div class="song-list">
+
       @for (song of tracks(); track song.name; let index = $index) {
-        <article class="song-item">
-          <span class="rank">
-  {{ (index + 1).toString().padStart(2, '0') }}
-</span>
-          <div class="cover">
-            @if (song.image) {
-              <img [src]="song.image" [alt]="song.name" />
-            } @else {
-              {{ song.name.charAt(0) }}
-            }
-          </div>
 
-          <div class="song-info">
-            <strong>{{ song.name }}</strong>
-            <small>{{ song.album || song.artist }}</small>
-          </div>
+        <app-song-card
+          [track]="song"
+          [index]="index">
+        </app-song-card>
 
-          <span class="plays">{{ song.playcount | compactNumber }} plays</span>
-        </article>
       }
+
     </div>
+
   }
+
 </section>

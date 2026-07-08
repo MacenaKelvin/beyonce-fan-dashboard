@@ -1,0 +1,83 @@
+.era-chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  min-height: 420px;
+}
+
+.section-header span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.section-header h3 {
+  margin: 4px 0 0;
+}
+
+.chart-placeholder {
+  display: grid;
+  place-items: center;
+  gap: 28px;
+  padding-top: 28px;
+}
+
+.donut {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle, var(--surface) 0 52%, transparent 53%),
+    conic-gradient(
+      #f4f4f5 0 42%,
+      #a1a1aa 42% 66%,
+      #71717a 66% 81%,
+      #3f3f46 81% 100%
+    );
+}
+
+.donut span {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.legend {
+  width: 100%;
+  display: grid;
+  gap: 14px;
+}
+
+.legend div {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  color: var(--muted);
+}
+
+.legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--platinum);
+}
+
+.legend div:nth-child(2) i {
+  background: #a1a1aa;
+}
+
+.legend div:nth-child(3) i {
+  background: #71717a;
+}
+
+.legend div:nth-child(4) i {
+  background: #3f3f46;
+}
+
+.legend strong {
+  color: var(--text);
+}

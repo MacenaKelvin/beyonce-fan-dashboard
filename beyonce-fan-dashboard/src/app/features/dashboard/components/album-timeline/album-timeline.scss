@@ -1,0 +1,51 @@
+.timeline-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.section-header span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.section-header h3 {
+  margin: 4px 0 28px;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+  position: relative;
+}
+
+.album {
+  position: relative;
+  display: grid;
+  gap: 10px;
+}
+
+.year {
+  color: var(--silver);
+  font-size: 0.85rem;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--platinum);
+  box-shadow: 0 0 20px rgba(244, 244, 245, 0.35);
+}
+
+.album strong {
+  font-size: 0.95rem;
+}
+
+.album small {
+  color: var(--muted);
+}

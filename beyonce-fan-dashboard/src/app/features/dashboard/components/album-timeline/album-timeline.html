@@ -1,0 +1,17 @@
+<section class="timeline-card">
+  <div class="section-header">
+    <span>Discography journey</span>
+    <h3>Album Timeline</h3>
+  </div>
+
+  <div class="timeline">
+    @for (album of albums; track album.title) {
+      <article class="album">
+        <span class="year">{{ album.year }}</span>
+        <div class="dot"></div>
+        <strong>{{ album.title }}</strong>
+        <small>{{ album.era }}</small>
+      </article>
+    }
+  </div>
+</section>
