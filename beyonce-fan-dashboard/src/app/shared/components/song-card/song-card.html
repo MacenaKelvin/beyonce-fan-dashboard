@@ -19,4 +19,14 @@
   <span class="plays">
     {{ track().playcount | compactNumber }} plays
   </span>
+
+  <button
+    class="preview-button"
+    type="button"
+    [disabled]="!track().previewUrl"
+    (click)="playPreview()"
+    [attr.aria-label]="'Play preview of ' + track().name"
+  >
+    ▶
+  </button>
 </article>

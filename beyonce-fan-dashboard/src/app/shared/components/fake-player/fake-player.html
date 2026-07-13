@@ -1,18 +1,78 @@
 <footer class="player">
-  <div>
-    <strong>CUFF IT</strong>
-    <span>Beyoncé</span>
-  </div>
+  @if (player.currentTrack(); as track) {
+    <div class="track">
+      <div class="track-cover">
+        @if (track.image) {
+          <img [src]="track.image" [alt]="track.name" />
+        } @else {
+          {{ track.name.charAt(0) }}
+        }
+      </div>
 
-  <div class="controls">
-    <button>⏮</button>
-    <button class="play">▶</button>
-    <button>⏭</button>
-  </div>
+      <div class="track-info">
+        <strong>{{ track.name }}</strong>
+        <span>{{ track.album || track.artist }}</span>
+      </div>
+    </div>
 
-  <div class="progress">
-    <span>1:24</span>
-    <div><i></i></div>
-    <span>3:45</span>
-  </div>
+    <div class="playback">
+      <div class="controls">
+        <button type="button" aria-label="Previous track" disabled>
+          ◀
+        </button>
+
+        <button
+          class="play"
+          type="button"
+          (click)="togglePlayback()"
+          [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'"
+        >
+          {{ player.isPlaying() ? '❚❚' : '▶' }}
+        </button>
+
+        <button type="button" aria-label="Next track" disabled>
+          ▶
+        </button>
+      </div>
+
+      <div class="progress">
+        <span>{{ formatTime(currentTime()) }}</span>
+
+        <input
+          type="range"
+          min="0"
+          [max]="duration()"
+          step="0.1"
+          [value]="currentTime()"
+          (input)="seek($event)"
+          aria-label="Track progress"
+        />
+
+        <span>{{ formatTime(duration()) }}</span>
+      </div>
+    </div>
+
+    <div class="volume">
+      <span>🔊</span>
+
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.05"
+        [value]="volume()"
+        (input)="changeVolume($event)"
+        aria-label="Volume"
+      />
+    </div>
+  } @else {
+    <div class="empty-player">
+      <span class="empty-icon">♫</span>
+
+      <div>
+        <strong>Select a song</strong>
+        <span>Choose a preview from Top Songs</span>
+      </div>
+    </div>
+  }
 </footer>
