@@ -1,33 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
-/* Reset */
 @use './styles/reset';
 @use './styles/variables';
 @use './styles/mixins';
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
-    background: #09090B;
-    color: #F5F5F5;
-    font-family: Inter, sans-serif;
-}
-
-/* Colors */
-
-:root {
-
-    --bg: #09090B;
-    --surface: #18181B;
-
-    --silver: #C0C0C0;
-    --platinum: #E7E5E4;
-
-    --text: #FAFAFA;
-    --muted: #A1A1AA;
-
-    --radius: 18px;
-
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 78% 10%,
+      rgba(167, 139, 250, 0.1),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 20% 75%,
+      rgba(212, 212, 216, 0.06),
+      transparent 26%
+    ),
+    linear-gradient(180deg, var(--background-soft), var(--background));
+  background-attachment: fixed;
 }

@@ -1,32 +1,28 @@
-.dashboard{
-
-    display:flex;
-    flex-direction:column;
-
-    gap:24px;
-
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.dashboard-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 420px;
-
-    gap:24px;
-
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.75fr);
+  gap: 24px;
+  align-items: stretch;
 }
 
-.placeholder-card{
+@media (max-width: 1150px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
-    background:var(--surface);
+@media (max-width: 760px) {
+  .dashboard {
+    gap: 16px;
+  }
 
-    border:1px solid var(--border);
-
-    border-radius:20px;
-
-    padding:24px;
-
-    min-height:420px;
-
+  .dashboard-grid {
+    gap: 16px;
+  }
 }

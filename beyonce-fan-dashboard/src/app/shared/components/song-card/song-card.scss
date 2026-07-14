@@ -1,45 +1,195 @@
 .song-item {
+  position: relative;
+  overflow: hidden;
+
   display: grid;
-  grid-template-columns: 42px 54px 1fr auto 42px;
+  grid-template-columns: 38px 58px minmax(0, 1fr) auto;
   gap: 14px;
   align-items: center;
-  padding: 14px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.035);
-  transition: 0.25s;
+
+  padding: 12px 14px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.038),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.song-item::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 244, 245, 0.035),
+    transparent
+  );
+
+  opacity: 0;
+  transform: translateX(-100%);
+  transition:
+    opacity var(--transition),
+    transform 600ms ease;
 }
 
 .song-item:hover {
-  transform: translateX(4px);
-  background: var(--surface-light);
+  transform: translateX(5px);
+  border-color: var(--border);
+  background: var(--surface-hover);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+}
+
+.song-item:hover::after {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+.song-item.is-playing {
+  border-color: var(--border-strong);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(167, 139, 250, 0.1),
+      rgba(255, 255, 255, 0.025)
+    );
 }
 
 .rank {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .cover {
-  width: 54px;
-  height: 54px;
-  border-radius: 16px;
+  position: relative;
+
+  width: 58px;
+  height: 58px;
+
   display: grid;
   place-items: center;
+
   overflow: hidden;
-  color: #09090b;
-  font-weight: 800;
+  border-radius: 16px;
+
   background: linear-gradient(135deg, var(--platinum), #71717a);
+  color: var(--background);
+
+  font-weight: 800;
 }
 
 .cover img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+
+  transition:
+    transform 400ms ease,
+    filter var(--transition);
+}
+
+.song-item:hover .cover img {
+  transform: scale(1.09);
+  filter: brightness(0.62);
+}
+
+.cover-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--platinum);
+  color: var(--background);
+
+  cursor: pointer;
+
+  opacity: 0;
+  transform: scale(0.75);
+
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.song-item:hover .cover-play,
+.song-item.is-playing .cover-play {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cover-play:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 0 26px rgba(244, 244, 245, 0.28);
+}
+
+.cover-play:disabled {
+  cursor: not-allowed;
+  opacity: 0.25;
 }
 
 .song-info {
+  min-width: 0;
   display: grid;
-  gap: 4px;
+  gap: 5px;
+}
+
+.song-title {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.song-title strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 0.9rem;
+}
+
+.trending {
+  flex-shrink: 0;
+
+  padding: 4px 7px;
+
+  border: 1px solid rgba(34, 197, 94, 0.18);
+  border-radius: 999px;
+
+  background: rgba(34, 197, 94, 0.09);
+  color: var(--success);
+
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .song-info small,
@@ -47,27 +197,31 @@
   color: var(--muted);
 }
 
+.song-info small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 0.76rem;
+}
+
 .plays {
-  font-size: 0.9rem;
-}
-.preview-button {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 50%;
-  background: var(--platinum);
-  color: var(--background);
-  cursor: pointer;
-  transition: 0.2s;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
-.preview-button:hover:not(:disabled) {
-  transform: scale(1.08);
-}
+@media (max-width: 620px) {
+  .song-item {
+    grid-template-columns: 30px 52px minmax(0, 1fr);
+  }
 
-.preview-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.35;
+  .plays {
+    display: none;
+  }
+
+  .cover {
+    width: 52px;
+    height: 52px;
+  }
 }

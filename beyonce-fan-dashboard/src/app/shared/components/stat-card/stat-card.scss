@@ -1,49 +1,61 @@
-.card{
+.card {
+  position: relative;
+  overflow: hidden;
 
-    background:var(--surface);
+  min-height: 150px;
+  padding: 20px;
 
-    border:1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 
-    border-radius:20px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.012)
+    ),
+    var(--surface);
 
-    padding:24px;
+  box-shadow: var(--shadow-card);
 
-    transition:.25s;
-
-    cursor:pointer;
-
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition);
 }
 
-.card:hover{
+.card::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: -55px;
+  right: -45px;
 
-    transform:translateY(-4px);
-
-    background:var(--surface-light);
-
+  border-radius: 50%;
+  background: rgba(244, 244, 245, 0.06);
+  filter: blur(20px);
 }
 
-span{
-
-    color:var(--muted);
-
-    font-size:.85rem;
-
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-strong);
+  background-color: var(--surface-hover);
 }
 
-h2{
-
-    margin-top:14px;
-
-    margin-bottom:12px;
-
-    font-size:2rem;
-
-    color:var(--platinum);
-
+span {
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
-small{
+h2 {
+  margin: 12px 0 10px;
+  color: var(--platinum);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  letter-spacing: -0.04em;
+}
 
-    color:var(--silver);
-
+small {
+  color: var(--silver);
 }

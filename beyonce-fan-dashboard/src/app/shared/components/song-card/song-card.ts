@@ -1,7 +1,8 @@
 import { Component, inject, input } from '@angular/core';
+
+import { Player } from '../../../core/services/player';
 import { Track } from '../../models/track';
 import { CompactNumberPipe } from '../../pipes/compact-number-pipe';
-import { Player } from '../../../core/services/player';
 
 @Component({
   selector: 'app-song-card',
@@ -10,15 +11,22 @@ import { Player } from '../../../core/services/player';
   styleUrl: './song-card.scss',
 })
 export class SongCard {
-  private readonly player = inject(Player);
+  readonly player = inject(Player);
 
-  track = input.required<Track>();
-  index = input.required<number>();
+  readonly track = input.required<Track>();
+  readonly index = input.required<number>();
 
   playPreview(): void {
     const track = this.track();
 
     if (!track.previewUrl) {
+      return;
+    }
+
+    const isCurrentTrack = this.player.currentTrack()?.name === track.name;
+
+    if (isCurrentTrack) {
+      this.player.toggle();
       return;
     }
 

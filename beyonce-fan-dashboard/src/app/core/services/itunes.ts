@@ -16,4 +16,16 @@ export class Itunes {
       },
     });
   }
+
+  searchAlbum(album: string, artist = 'Beyoncé') {
+    return this.http.get<any>('https://itunes.apple.com/search', {
+      params: {
+        term: `${artist} ${album}`,
+        media: 'music',
+        entity: 'album',
+        attribute: 'albumTerm',
+        limit: 5,
+      },
+    });
+  }
 }

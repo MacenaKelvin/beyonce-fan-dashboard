@@ -4,37 +4,44 @@
       <span>Era analytics</span>
       <h3>Era Distribution</h3>
     </div>
+
+    <span class="live-badge">
+      <i></i>
+      Live data
+    </span>
   </div>
 
-  <div class="chart-placeholder">
-    <div class="donut">
-      <span>42%</span>
-    </div>
+  <div class="chart-content">
+    <div class="chart-wrapper">
+      <canvas
+        baseChart
+        [type]="chartType"
+        [data]="chartData"
+        [options]="chartOptions"
+      >
+      </canvas>
 
-    <div class="legend">
-      <div>
-        <i></i>
-        <span>Renaissance</span>
-        <strong>42%</strong>
-      </div>
-
-      <div>
-        <i></i>
-        <span>Lemonade</span>
-        <strong>24%</strong>
-      </div>
-
-      <div>
-        <i></i>
-        <span>B'Day</span>
-        <strong>15%</strong>
-      </div>
-
-      <div>
-        <i></i>
-        <span>Beyoncé</span>
-        <strong>10%</strong>
+      <div class="chart-center">
+        <strong>8</strong>
+        <span>eras</span>
       </div>
     </div>
+
+<div class="legend">
+  @for (era of eras; track era.name) {
+    <div class="legend-item">
+      <span
+        class="legend-color"
+        [style.background]="era.color"
+      ></span>
+
+      <span class="legend-name">
+        {{ era.name }}
+      </span>
+
+      <strong>{{ era.value }}%</strong>
+    </div>
+  }
+</div>
   </div>
 </section>

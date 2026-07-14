@@ -1,4 +1,9 @@
-<article class="song-item">
+<article
+  class="song-item"
+  [class.is-playing]="
+    player.currentTrack()?.name === track().name && player.isPlaying()
+  "
+>
   <span class="rank">
     {{ (index() + 1).toString().padStart(2, '0') }}
   </span>
@@ -9,24 +14,38 @@
     } @else {
       {{ track().name.charAt(0) }}
     }
+
+    <button
+      class="cover-play"
+      type="button"
+      [disabled]="!track().previewUrl"
+      (click)="playPreview()"
+      [attr.aria-label]="'Play preview of ' + track().name"
+    >
+      @if (
+        player.currentTrack()?.name === track().name &&
+        player.isPlaying()
+      ) {
+        ❚❚
+      } @else {
+        ▶
+      }
+    </button>
   </div>
 
   <div class="song-info">
-    <strong>{{ track().name }}</strong>
+    <div class="song-title">
+      <strong>{{ track().name }}</strong>
+
+      @if (index() === 0) {
+        <span class="trending">Trending</span>
+      }
+    </div>
+
     <small>{{ track().album || track().artist }}</small>
   </div>
 
   <span class="plays">
     {{ track().playcount | compactNumber }} plays
   </span>
-
-  <button
-    class="preview-button"
-    type="button"
-    [disabled]="!track().previewUrl"
-    (click)="playPreview()"
-    [attr.aria-label]="'Play preview of ' + track().name"
-  >
-    ▶
-  </button>
 </article>

@@ -1,17 +1,52 @@
 <section class="timeline-card">
   <div class="section-header">
-    <span>Discography journey</span>
-    <h3>Album Timeline</h3>
+    <div>
+      <span>Discography journey</span>
+      <h3>Album Timeline</h3>
+    </div>
+
+    <button type="button">Explore albums →</button>
   </div>
 
-  <div class="timeline">
-    @for (album of albums; track album.title) {
-      <article class="album">
-        <span class="year">{{ album.year }}</span>
-        <div class="dot"></div>
-        <strong>{{ album.title }}</strong>
-        <small>{{ album.era }}</small>
-      </article>
-    }
-  </div>
+  @if (loading()) {
+    <div class="timeline-loading">
+      Loading album covers...
+    </div>
+  } @else {
+    <div class="timeline">
+      @for (album of albums(); track album.title; let index = $index) {
+        <article class="album">
+          <div class="album-cover">
+            @if (album.image) {
+              <img
+                [src]="album.image"
+                [alt]="'Cover of ' + album.title"
+                loading="lazy"
+              />
+            } @else {
+              <span>{{ album.title.charAt(0) }}</span>
+            }
+
+            <div class="cover-overlay">
+              <span>{{ album.year }}</span>
+            </div>
+          </div>
+
+          <div class="timeline-marker">
+            <span class="dot"></span>
+
+            @if (index < albums().length - 1) {
+              <span class="line"></span>
+            }
+          </div>
+
+          <div class="album-copy">
+            <span class="year">{{ album.year }}</span>
+            <strong>{{ album.title }}</strong>
+            <small>{{ album.era }}</small>
+          </div>
+        </article>
+      }
+    </div>
+  }
 </section>
